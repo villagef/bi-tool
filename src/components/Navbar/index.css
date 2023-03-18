@@ -1,0 +1,28 @@
+.flex {
+    display: flex;
+}
+
+.navbar-logo-wrapper {
+    justify-content: space-between;
+}
+
+.navbar-trigger {
+    padding: 0 24px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+    color: #d3dae2;
+}
+
+.navbar-trigger:hover {
+    color: #1890ff;
+}
+
+.navbar-logo {
+    height: 32px;
+    width: 90px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+}
