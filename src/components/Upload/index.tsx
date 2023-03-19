@@ -7,22 +7,22 @@ import "components/Upload/index.css";
 const { Dragger } = Upload;
 
 interface Props {
-  setParsedData: (e: Papa.ParseResult<unknown> | null) => void;
+  setUploadResult: (e: Papa.ParseResult<unknown> | null) => void;
 }
 
-const UploadComponent = ({ setParsedData }: Props) => {
+const UploadComponent = ({ setUploadResult }: Props) => {
   const props: UploadProps = {
     name: "file",
     multiple: false,
     accept: ".csv",
     beforeUpload(file) {
-      setParsedData(null);
+      setUploadResult(null);
       const reader = new FileReader();
       reader.readAsText(file);
       reader.onload = (e) => {
         const result = e.target?.result as string;
         const data = Papa.parse(result, { header: true });
-        setParsedData(data);
+        setUploadResult(data);
       };
       reader.onloadend = () => {
         message.success("File uploaded successfully.");

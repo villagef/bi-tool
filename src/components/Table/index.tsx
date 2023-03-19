@@ -5,15 +5,19 @@ import "components/Table/index.css";
 const TableComponent = ({
   data,
   columns,
+  rowKey,
+  title,
   size = "small",
   loading,
   onRowClick,
 }: TableProps) => {
   return (
     <>
+      {title && <h1>{title}</h1>}
       <Table
         className="table-component"
         columns={columns}
+        rowKey={rowKey ?? "id"}
         dataSource={data}
         pagination={false}
         size={size}

@@ -1,8 +1,14 @@
 .table-component .ant-table-thead>tr>th {
     background-color: #f1f5fa;
+    text-transform: capitalize;
 }
 
 .table-component .ant-table-row:nth-child(2n) {
     background-color: #f7fbff;
     opacity: 0.9;
+}
+
+.ant-table-tbody {
+    height: 200px !important;
+    overflow-y: auto;
 }
