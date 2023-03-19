@@ -1,0 +1,8 @@
+.table-component .ant-table-thead>tr>th {
+    background-color: #f1f5fa;
+}
+
+.table-component .ant-table-row:nth-child(2n) {
+    background-color: #f7fbff;
+    opacity: 0.9;
+}

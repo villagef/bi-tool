@@ -1,3 +1,7 @@
 .ant-upload-list {
     display: none;
 }
+
+.ant-upload-drag {
+    background-color: #f7fbff !important;
+}

@@ -20,7 +20,7 @@ const NavbarComponent = () => {
   return (
     <>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="flex navbar-logo-wrapper">
+        <div className="navbar-logo-wrapper">
           {!collapsed && <div className="navbar-logo" />}
           {React.createElement(
             collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,

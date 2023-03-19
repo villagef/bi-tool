@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
 import { message, Upload } from "antd";
@@ -15,7 +14,7 @@ const UploadComponent = ({ setParsedData }: Props) => {
   const props: UploadProps = {
     name: "file",
     multiple: false,
-    accept: ".csv, .json",
+    accept: ".csv",
     beforeUpload(file) {
       setParsedData(null);
       const reader = new FileReader();
@@ -45,7 +44,7 @@ const UploadComponent = ({ setParsedData }: Props) => {
           Click or drag file to this area to upload
         </p>
         <p className="ant-upload-hint">
-          Support for a single from .csv or .json.
+          Support for a single upload from .csv.
         </p>
       </Dragger>
     </>
