@@ -19,6 +19,21 @@ const DatabasePage = () => {
     }
   );
 
+  const handleConfirmUpload = () => {
+    fetch("http://localhost:8080/api", {
+      headers: {
+        authorization: "",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({ data: uploadData }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+
+    setUploadResult(null);
+  };
+
   return (
     <>
       <ContentBox>
@@ -27,7 +42,7 @@ const DatabasePage = () => {
             open={true}
             title="Uploaded data"
             closable={true}
-            onOk={() => setUploadResult(null)}
+            onOk={handleConfirmUpload}
             onCancel={() => setUploadResult(null)}
           >
             <TableComponent
