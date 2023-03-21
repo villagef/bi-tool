@@ -3,12 +3,14 @@ import type { UploadProps } from "antd";
 import { message, Upload } from "antd";
 import Papa from "papaparse";
 import "components/Upload/index.css";
-
-const { Dragger } = Upload;
+import { TableDataProps } from "components/Table/types";
+import { DatasetProps } from "pages/Database/types";
 
 interface Props {
-  setUploadResult: (e: Papa.ParseResult<unknown> | null) => void;
+  setUploadResult: (e: Partial<DatasetProps>) => void;
 }
+
+const { Dragger } = Upload;
 
 const UploadComponent = ({ setUploadResult }: Props) => {
   const props: UploadProps = {
@@ -21,8 +23,16 @@ const UploadComponent = ({ setUploadResult }: Props) => {
       reader.readAsText(file);
       reader.onload = (e) => {
         const result = e.target?.result as string;
-        const data = Papa.parse(result, { header: true });
-        setUploadResult(data);
+        const papaParsed = Papa.parse(result, { header: true });
+        const object = {
+          name: file.name,
+          lastModifiedDate: file.lastModifiedDate,
+          size: file.size,
+          fileType: file.type,
+          data: papaParsed.data as TableDataProps[],
+          columns: papaParsed.meta.fields,
+        };
+        setUploadResult(object);
       };
       reader.onloadend = () => {
         message.success("File uploaded successfully.");

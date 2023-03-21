@@ -1,3 +1,4 @@
+import { DatasetProps } from "pages/Database/types";
 import { ReactElement } from "react";
 
 export interface TableDataProps {
@@ -9,6 +10,7 @@ export interface TableColumnProps {
   dataIndex: string;
   key?: string;
   ellipsis?: boolean;
+  width?: string;
   render?: (
     tag: string,
     record?: string,
@@ -17,7 +19,7 @@ export interface TableColumnProps {
 }
 
 export interface TableProps {
-  data: TableDataProps[];
+  data: TableDataProps[] | Partial<DatasetProps[]>;
   columns: TableColumnProps[];
   rowKey?: string;
   title?: string;
