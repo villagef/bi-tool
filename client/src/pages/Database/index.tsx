@@ -6,13 +6,15 @@ import UploadComponent from "components/Upload";
 import { request } from "utils/request";
 import { CONFIG } from "./config";
 import { DatasetProps } from "./types";
+import "./index.css";
 import UploadResult from "components/UploadResult";
 import DatasetDetails from "components/DatasetDetails";
 
 const DatabasePage = () => {
   const [datasets, setDatasets] = useState<DatasetProps[]>([]);
   const [uploadResult, setUploadResult] = useState<Partial<DatasetProps>>(null);
-  const [selectedDataset, setSelectedDataset] = useState<string>(null);
+  const [viewDetailsId, setViewDetailsId] = useState<string>(null);
+  const [reload, setReload] = useState(true);
 
   async function fetchData(): Promise<void> {
     try {
@@ -23,13 +25,26 @@ const DatabasePage = () => {
     }
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  async function removeData(id: string): Promise<void> {
+    try {
+      await request<DatasetProps[]>("delete", `${id}`);
+    } catch (error) {
+      message.error(`${error.message}`);
+    }
+  }
 
   const handleViewDetails = (id: string) => {
-    setSelectedDataset(id);
+    setViewDetailsId(id);
   };
+
+  const handleRemoveDataset = (id: string) => {
+    removeData(id);
+    setReload((prev) => !prev);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [reload]);
 
   return (
     <>
@@ -41,22 +56,15 @@ const DatabasePage = () => {
             fetchData={fetchData}
           />
         )}
-        {selectedDataset && (
-          <DatasetDetails id={selectedDataset} setId={setSelectedDataset} />
+        {viewDetailsId && (
+          <DatasetDetails id={viewDetailsId} setId={setViewDetailsId} />
         )}
-        <div style={{ width: "100%", height: "30%", margin: "6px 0px" }}>
+        <div className="database-upload-section">
           <UploadComponent setUploadResult={setUploadResult} />
         </div>
-        <div
-          id="database-table-section"
-          style={{
-            width: "100%",
-            height: "68%",
-            margin: "12px 0px",
-          }}
-        >
+        <div className="database-table-section">
           <TableComponent
-            columns={CONFIG(handleViewDetails)}
+            columns={CONFIG(handleViewDetails, handleRemoveDataset)}
             data={datasets}
             title="Database"
           />

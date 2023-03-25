@@ -5,10 +5,15 @@ import {
   FileExcelFilled,
   FireOutlined,
 } from "@ant-design/icons";
-import { Button, Tooltip } from "antd";
+import { Button, Popconfirm, Tooltip } from "antd";
 import { DatasetProps } from "./types";
 
-export const CONFIG = (handleViewDetails: (el: string) => void) => {
+type Props = (el: string) => void;
+
+export const CONFIG = (
+  handleViewDetails: Props,
+  handleRemoveDataset: Props
+) => {
   return [
     {
       title: "Name",
@@ -61,7 +66,7 @@ export const CONFIG = (handleViewDetails: (el: string) => void) => {
       key: "action",
       render: (_: unknown, record: Partial<DatasetProps>) => (
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Tooltip placement="top" title={"View details"}>
+          <Tooltip placement="left" title={"View details"}>
             <Button
               style={{ margin: "0px 5px" }}
               type="text"
@@ -70,13 +75,21 @@ export const CONFIG = (handleViewDetails: (el: string) => void) => {
               <SearchOutlined />
             </Button>
           </Tooltip>
-          <Tooltip placement="top" title={"Remove dataset"}>
-            <Button
-              style={{ margin: "0px 10px", background: "#eb3627" }}
-              type="primary"
+          <Tooltip placement="left" title={"Remove dataset"}>
+            <Popconfirm
+              title="Delete the dataset"
+              description="Are you sure to delete this dataset?"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={() => handleRemoveDataset(record?.id)}
             >
-              <DeleteOutlined />
-            </Button>
+              <Button
+                style={{ margin: "0px 10px", background: "#eb3627" }}
+                type="primary"
+              >
+                <DeleteOutlined />
+              </Button>
+            </Popconfirm>
           </Tooltip>
         </div>
       ),
