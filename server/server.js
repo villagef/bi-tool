@@ -61,4 +61,21 @@ app.post("/api", async (req, res) => {
   }
 });
 
+// Endpoint DELETE by ID
+app.delete("/api/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await jsonfile.readFile(DATABASE_NAME);
+    const newData = data.filter((elem) => elem.id !== id);
+    if (newData.length === data.length) {
+      return res.status(404).send("Element not found!");
+    }
+    await jsonfile.writeFile(DATABASE_NAME, newData);
+    res.send(newData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server failed!");
+  }
+});
+
 app.listen(PORT, () => console.log(`Server works on port ${PORT}`));
