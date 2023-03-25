@@ -69,7 +69,6 @@ export const CONFIG = (
           <Tooltip placement="left" title={"View details"}>
             <Button
               style={{ margin: "0px 5px" }}
-              type="text"
               onClick={() => handleViewDetails(record?.id)}
             >
               <SearchOutlined />

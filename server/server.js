@@ -15,7 +15,8 @@ app.use(express.urlencoded({ limit: "1000mb" }));
 app.get("/api", async (req, res) => {
   try {
     const data = await jsonfile.readFile(DATABASE_NAME);
-    res.send(data);
+    const modifiedData = data.map(({ data, columns, ...rest }) => rest);
+    res.send(modifiedData);
   } catch (err) {
     console.log(err);
     res.status(500).send("Server failed!");
