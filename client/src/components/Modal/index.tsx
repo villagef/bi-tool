@@ -6,8 +6,8 @@ interface Props {
   children: ReactNode;
   open: boolean;
   title: string;
-  onOk: () => void;
-  onCancel: () => void;
+  onOk?: () => void;
+  onCancel?: () => void;
   closable?: boolean;
 }
 
@@ -28,24 +28,29 @@ const ModalComponent = ({
         width="90vw"
         title={title}
         onCancel={onCancel}
+        centered
         footer={[
-          <Button
-            key="modal-cancel-button"
-            type="default"
-            htmlType="button"
-            onClick={onCancel}
-          >
-            Cancel
-          </Button>,
-          <Button
-            key="modal-submit-button"
-            type="primary"
-            htmlType="submit"
-            onClick={onOk}
-            style={{ background: "#030852" }}
-          >
-            Submit
-          </Button>,
+          onCancel && (
+            <Button
+              key="modal-cancel-button"
+              type="default"
+              htmlType="button"
+              onClick={onCancel}
+            >
+              Cancel
+            </Button>
+          ),
+          onOk && (
+            <Button
+              key="modal-submit-button"
+              type="primary"
+              htmlType="submit"
+              onClick={onOk}
+              style={{ background: "#030852" }}
+            >
+              Submit
+            </Button>
+          ),
         ]}
       >
         <div className="custom-modal-wrapper">{children}</div>

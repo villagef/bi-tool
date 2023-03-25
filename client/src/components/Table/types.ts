@@ -13,7 +13,7 @@ export interface TableColumnProps {
   width?: string;
   render?: (
     tag: string,
-    record?: string,
+    record?: unknown,
     index?: number
   ) => ReactElement | undefined | string;
 }

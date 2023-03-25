@@ -22,6 +22,26 @@ app.get("/api", async (req, res) => {
   }
 });
 
+// Endpoint GET by ID
+app.get("/api/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await jsonfile.readFile(DATABASE_NAME);
+    const element = data.find((elem) => elem.id === id);
+    if (!element) {
+      return res.status(404).send("Element not found!");
+    }
+    res.send({
+      name: element.name,
+      columns: element.columns,
+      data: element.data,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server failed!");
+  }
+});
+
 // Endpoint POST
 app.post("/api", async (req, res) => {
   const newData = req.body;

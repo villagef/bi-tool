@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import { message } from "antd";
 import ContentBox from "components/ContentBox";
-import ModalComponent from "components/Modal";
 import TableComponent from "components/Table";
 import UploadComponent from "components/Upload";
 import { request } from "utils/request";
 import { CONFIG } from "./config";
 import { DatasetProps } from "./types";
+import UploadResult from "components/UploadResult";
+import DatasetDetails from "components/DatasetDetails";
 
 const DatabasePage = () => {
   const [datasets, setDatasets] = useState<DatasetProps[]>([]);
   const [uploadResult, setUploadResult] = useState<Partial<DatasetProps>>(null);
-  const uploadTableColumns = uploadResult?.columns?.map((el: string) => {
-    return { title: el, dataIndex: el };
-  });
+  const [selectedDataset, setSelectedDataset] = useState<string>(null);
 
   async function fetchData(): Promise<void> {
     try {
@@ -24,45 +23,26 @@ const DatabasePage = () => {
     }
   }
 
-  async function postDataset(): Promise<void> {
-    const object = {
-      owner: "John Doe",
-      location: "My Workspace",
-      ...uploadResult,
-    };
-
-    try {
-      const response = await request<DatasetProps[]>("post", "", object);
-      message.success(`${response.data}`);
-      setUploadResult(null);
-      fetchData();
-    } catch (error) {
-      message.error(`${error.message}`);
-    }
-  }
-
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleViewDetails = (id: string) => {
+    setSelectedDataset(id);
+  };
 
   return (
     <>
       <ContentBox>
         {uploadResult && (
-          <ModalComponent
-            open={true}
-            title="Uploaded data"
-            closable={true}
-            onOk={postDataset}
-            onCancel={() => setUploadResult(null)}
-          >
-            <TableComponent
-              columns={uploadTableColumns}
-              data={uploadResult.data}
-              rowKey={uploadTableColumns[0].dataIndex}
-              loading={uploadResult ? false : true}
-            />
-          </ModalComponent>
+          <UploadResult
+            uploadResult={uploadResult}
+            setUploadResult={setUploadResult}
+            fetchData={fetchData}
+          />
+        )}
+        {selectedDataset && (
+          <DatasetDetails id={selectedDataset} setId={setSelectedDataset} />
         )}
         <div style={{ width: "100%", height: "30%", margin: "6px 0px" }}>
           <UploadComponent setUploadResult={setUploadResult} />
@@ -75,7 +55,11 @@ const DatabasePage = () => {
             margin: "12px 0px",
           }}
         >
-          <TableComponent columns={CONFIG} data={datasets} title="Database" />
+          <TableComponent
+            columns={CONFIG(handleViewDetails)}
+            data={datasets}
+            title="Database"
+          />
         </div>
       </ContentBox>
     </>
