@@ -13,7 +13,7 @@ export interface ApiError {
 export async function request<T>(
   method: string = "get",
   endpoint: string = "",
-  data?: Record<string, unknown>,
+  data?: T,
   headers?: Record<string, string>
 ): Promise<ApiResponse<T>> {
   const url = `http://localhost:8080/api/${endpoint}`;

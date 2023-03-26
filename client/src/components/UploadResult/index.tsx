@@ -3,28 +3,28 @@ import ModalComponent from "components/Modal";
 import TableComponent from "components/Table";
 import { TableDataProps } from "components/Table/types";
 import useFetchData, { QueryKeys } from "hooks/useFetchData";
+import usePostData from "hooks/usePostData";
 import { DatasetProps } from "pages/Database/types";
 import { handleColumns } from "utils/handleColumns";
 import { idInjector } from "utils/idInjector";
-import { request } from "utils/request";
 
 const UploadResult = ({ uploadResult, setUploadResult }) => {
-  const { refetch } = useFetchData(QueryKeys.datasets);
-  async function postDataset(): Promise<void> {
+  const { mutateAsync, isLoading } = usePostData<DatasetProps>();
+  const { refetch } = useFetchData<DatasetProps[]>(QueryKeys.datasets);
+
+  function handleSubmit() {
     const object = {
       owner: "John Doe",
       location: "My Workspace",
       ...uploadResult,
     };
-
-    try {
-      const response = await request<DatasetProps[]>("post", "", object);
-      message.success(`${response.data}`);
-      setUploadResult(null);
-      refetch();
-    } catch (error) {
-      message.error(`${error.message}`);
-    }
+    mutateAsync(object)
+      .then((response: { data: string; status: number }) => {
+        refetch();
+        setUploadResult(null);
+        message.success(`${response.data}`);
+      })
+      .catch((error) => message.error(`${error.message}`));
   }
 
   return (
@@ -32,14 +32,14 @@ const UploadResult = ({ uploadResult, setUploadResult }) => {
       open={true}
       title="Uploaded data"
       closable={true}
-      onOk={postDataset}
+      onOk={handleSubmit}
       onCancel={() => setUploadResult(null)}
     >
       <TableComponent
         columns={handleColumns(uploadResult?.columns)}
         data={idInjector<TableDataProps>(uploadResult?.data)}
         rowKey={"customId"}
-        loading={uploadResult ? false : true}
+        loading={isLoading}
       />
     </ModalComponent>
   );
