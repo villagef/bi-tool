@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
 import ModalComponent from "components/Modal";
 import TableComponent from "components/Table";
 import { DatasetProps } from "pages/Database/types";
-import { request } from "utils/request";
-import { message } from "antd";
 import { handleColumns } from "utils/handleColumns";
+import useFetchData, { QueryKeys } from "hooks/useFetchData";
 
 interface Props {
   id: string;
@@ -12,36 +10,25 @@ interface Props {
 }
 
 const DatasetDetails = ({ id, setId }: Props) => {
-  const [dataset, setDataset] = useState<any>(null);
-
-  async function fetchData(): Promise<void> {
-    try {
-      const response = await request<DatasetProps>("get", `${id}`);
-      setDataset(response.data);
-    } catch (error) {
-      message.error(`${error.message}`);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { isSuccess, data, isLoading } = useFetchData<DatasetProps>(
+    QueryKeys.dataset,
+    `${id}`
+  );
 
   return (
-    !!dataset && (
-      <ModalComponent
-        open={!!dataset}
-        title={dataset.name}
-        closable={true}
-        onCancel={() => setId(null)}
-      >
-        <TableComponent
-          columns={handleColumns(dataset.columns)}
-          data={dataset.data}
-          rowKey={handleColumns(dataset.columns)[0].dataIndex}
-        />
-      </ModalComponent>
-    )
+    <ModalComponent
+      open={isSuccess}
+      title={data.name}
+      closable={true}
+      onCancel={() => setId(null)}
+    >
+      <TableComponent
+        columns={handleColumns(data.columns)}
+        data={data.data}
+        rowKey={handleColumns(data.columns)[0].dataIndex}
+        loading={isLoading}
+      />
+    </ModalComponent>
   );
 };
 
