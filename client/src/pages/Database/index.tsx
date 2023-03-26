@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { message } from "antd";
 import ContentBox from "components/ContentBox";
 import TableComponent from "components/Table";
 import UploadComponent from "components/Upload";
-import { request } from "utils/request";
 import { CONFIG } from "./config";
 import { DatasetProps } from "./types";
 import "./index.css";
 import DatasetDetails from "components/DatasetDetails";
 import useFetchData, { QueryKeys } from "hooks/useFetchData";
+import useDeleteData from "hooks/useDeleteData";
 
 const DatabasePage = () => {
   const [viewDetailsId, setViewDetailsId] = useState<string>(null);
@@ -16,22 +15,11 @@ const DatabasePage = () => {
     Omit<DatasetProps[], "columns" | "data">
   >(QueryKeys.datasets);
 
-  async function removeData(id: string): Promise<void> {
-    try {
-      await request<DatasetProps[]>("delete", `${id}`);
-      refetch();
-    } catch (error) {
-      message.error(`${error.message}`);
-    }
-  }
-
   const handleViewDetails = (id: string) => {
     setViewDetailsId(id);
   };
 
-  const handleRemoveDataset = (id: string) => {
-    removeData(id);
-  };
+  const HandleRemoveDataset = (id: string) => useDeleteData(id, refetch);
 
   return (
     <>
@@ -44,7 +32,7 @@ const DatabasePage = () => {
         </div>
         <div className="database-table-section">
           <TableComponent
-            columns={CONFIG(handleViewDetails, handleRemoveDataset)}
+            columns={CONFIG(handleViewDetails, HandleRemoveDataset)}
             data={data}
             title="Database"
             loading={isLoading}
