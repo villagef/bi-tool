@@ -7,16 +7,14 @@ import { request } from "utils/request";
 import { CONFIG } from "./config";
 import { DatasetProps } from "./types";
 import "./index.css";
-import UploadResult from "components/UploadResult";
 import DatasetDetails from "components/DatasetDetails";
 import useFetchData, { QueryKeys } from "hooks/useFetchData";
 
 const DatabasePage = () => {
-  const [uploadResult, setUploadResult] = useState<Partial<DatasetProps>>(null);
   const [viewDetailsId, setViewDetailsId] = useState<string>(null);
-  const { data, isLoading, refetch } = useFetchData<DatasetProps[]>(
-    QueryKeys.datasets
-  );
+  const { data, isLoading, refetch } = useFetchData<
+    Omit<DatasetProps[], "columns" | "data">
+  >(QueryKeys.datasets);
 
   async function removeData(id: string): Promise<void> {
     try {
@@ -38,17 +36,11 @@ const DatabasePage = () => {
   return (
     <>
       <ContentBox>
-        {uploadResult && (
-          <UploadResult
-            uploadResult={uploadResult}
-            setUploadResult={setUploadResult}
-          />
-        )}
         {viewDetailsId && (
           <DatasetDetails id={viewDetailsId} setId={setViewDetailsId} />
         )}
         <div className="database-upload-section">
-          <UploadComponent setUploadResult={setUploadResult} />
+          <UploadComponent />
         </div>
         <div className="database-table-section">
           <TableComponent

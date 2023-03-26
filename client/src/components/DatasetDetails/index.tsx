@@ -3,6 +3,8 @@ import TableComponent from "components/Table";
 import { DatasetProps } from "pages/Database/types";
 import { handleColumns } from "utils/handleColumns";
 import useFetchData, { QueryKeys } from "hooks/useFetchData";
+import { idInjector } from "utils/idInjector";
+import { TableDataProps } from "components/Table/types";
 
 interface Props {
   id: string;
@@ -24,8 +26,8 @@ const DatasetDetails = ({ id, setId }: Props) => {
     >
       <TableComponent
         columns={handleColumns(data.columns)}
-        data={data.data}
-        rowKey={handleColumns(data.columns)[0].dataIndex}
+        data={idInjector<TableDataProps>(data?.data)}
+        rowKey={"customId"}
         loading={isLoading}
       />
     </ModalComponent>
