@@ -1,13 +1,15 @@
 import ContentBox from "components/ContentBox";
-import HeaderBox from "components/HeaderBox";
+import FieldsSider from "components/Sider/FieldsSider";
+import PropertiesSider from "components/Sider/PropertiesSider";
 
 const DashboardPage = () => {
   return (
     <>
-      <HeaderBox>
-        <div>DashboardPage</div>
-      </HeaderBox>
-      <ContentBox>DashboardPage</ContentBox>
+      <ContentBox>
+        <div>xd</div>
+      </ContentBox>
+      <PropertiesSider />
+      <FieldsSider />
     </>
   );
 };

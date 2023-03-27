@@ -19,7 +19,12 @@ const NavbarComponent = () => {
 
   return (
     <>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        collapsedWidth={50}
+      >
         <div className="navbar-logo-wrapper">
           {!collapsed && <div className="navbar-logo" />}
           {React.createElement(
