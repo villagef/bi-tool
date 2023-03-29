@@ -17,20 +17,24 @@ const PropertiesSider = () => {
   return (
     <Sider
       collapsible
-      reverseArrow={false}
+      reverseArrow={true}
       collapsed={open}
       theme="dark"
       className="properties-sider"
       collapsedWidth={20}
       onCollapse={() => setOpen((prev) => !prev)}
     >
-      <div
-        ref={drop}
-        className="properties-sider-content-wrapper"
-        style={{ width: "100%", height: "100%", background: "#fbbc04" }}
-      >
-        content box
-      </div>
+      {!open && (
+        <>
+          <div
+            ref={drop}
+            className="properties-sider-content-wrapper"
+            style={{ width: "100%", height: "100%", background: "#fbbc04" }}
+          >
+            content box
+          </div>
+        </>
+      )}
     </Sider>
   );
 };
