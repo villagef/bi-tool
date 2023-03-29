@@ -2,68 +2,21 @@ import Sider from "antd/es/layout/Sider";
 import { useState } from "react";
 import { useDrop } from "react-dnd";
 import "./index.css";
-import {
-  AndroidFilled,
-  AppleFilled,
-  WindowsFilled,
-  YoutubeFilled,
-  BugFilled,
-  FrownFilled,
-  TrophyFilled,
-} from "@ant-design/icons";
 import SidebarItem from "../FieldsSider/siderElement";
+import { charts_mock } from "./mocked_data";
 
 const PropertiesSider = () => {
   const [doppedFields, setDroppedFields] = useState<string[]>([]);
   const [open, setOpen] = useState(true);
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: "sidebarItem",
-    drop: (element: any) => setDroppedFields((prev) => [...prev, element.name]),
+    drop: (element: any) =>
+      setDroppedFields((prev) => [...new Set([...prev, element.name])]),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
   }));
-
-  const isActive = canDrop && isOver;
-
-  const charts_mock = [
-    {
-      id: "bar_graph_chart",
-      name: "Bar Graph",
-      source: <AndroidFilled />,
-    },
-    {
-      id: "pie_chart",
-      name: "Pie Chart",
-      source: <AppleFilled />,
-    },
-    {
-      id: "bar_graph_charts",
-      name: "Bar Graph",
-      source: <WindowsFilled />,
-    },
-    {
-      id: "bar_graph_chartaadsd",
-      name: "Bar Graph",
-      source: <YoutubeFilled />,
-    },
-    {
-      id: "bar_graph_chartasdasdczx",
-      name: "Bar Graph",
-      source: <BugFilled />,
-    },
-    {
-      id: "bar_graph_chartzxc",
-      name: "Bar Graph",
-      source: <FrownFilled />,
-    },
-    {
-      id: "bar_graph_charte42",
-      name: "Bar Graph",
-      source: <TrophyFilled />,
-    },
-  ];
 
   return (
     <Sider
@@ -92,11 +45,17 @@ const PropertiesSider = () => {
           <div
             ref={drop}
             className="properties-sider-wrapper"
-            style={{ background: isActive ? "red" : "transparent" }}
+            style={{ background: canDrop && isOver ? "red" : "transparent" }}
           >
-            {doppedFields?.map((field: string) => (
-              <SidebarItem key={field} name={field} />
-            ))}
+            {doppedFields.length > 0 ? (
+              doppedFields?.map((field: string) => (
+                <SidebarItem key={field} name={field} />
+              ))
+            ) : (
+              <div className="properties-sider-placeholder">
+                Drop fields here...
+              </div>
+            )}
           </div>
         </>
       )}

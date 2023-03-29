@@ -6,19 +6,19 @@
 }
 
 .properties-sider-title {
-    height: 50px;
+    height: 40px;
     width: 100%;
     display: flex;
     align-items: center;
     padding: 10px;
     font-weight: bold;
-    font-size: 1.25rem;
+    font-size: 1rem;
     background-color: #001529;
     color: #fff;
 }
 
 .properties-sider-charts-wrapper {
-    width: calc(100%);
+    width: 100%;
     height: auto;
     min-height: 130px;
     padding: 10px;
@@ -55,6 +55,17 @@
     width: 100%;
     height: 100%;
     position: absolute;
+}
+
+.properties-sider-placeholder {
+    width: calc(100%- 20px);
+    height: calc(100% - 250px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed gray;
+    border-radius: 10px;
+    margin: 10px;
 }
 
 .divider {
