@@ -1,0 +1,64 @@
+.properties-sider {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset -27px 0px 24px -26px rgba(150, 151, 161, 0.2);
+}
+
+.properties-sider-title {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.25rem;
+    background-color: #001529;
+    color: #fff;
+}
+
+.properties-sider-charts-wrapper {
+    width: calc(100%);
+    height: auto;
+    min-height: 130px;
+    padding: 10px;
+}
+
+.properties-sider-charts-title {
+    font-size: 0.90rem;
+    font-weight: 500;
+    color: #25282b;
+}
+
+.properties-sider-charts {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.properties-sider-chart {
+    margin: 3px;
+    padding: 5px;
+    color: #113e69;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.properties-sider-chart>a {
+    width: 20px;
+    height: 20px;
+
+}
+
+.properties-sider-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.divider {
+    width: 100%;
+    height: 3px;
+    background-color: #001529;
+}

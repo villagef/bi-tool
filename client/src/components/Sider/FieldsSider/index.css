@@ -1,12 +1,13 @@
 .sidebar-item {
     width: calc(100% - 20px);
     border: 1px solid transparent;
-    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 0.16);
+    box-shadow: 8px 8px 24px 0px rgba(169, 171, 197, 0.16);
     border-radius: 6px;
     margin: 10px;
     padding: 6px;
-    font-size: 0.95rem;
+    font-size: 0.90rem;
     font-weight: 500;
+    color: #25282b;
 }
 
 .sidebar-item:hover {

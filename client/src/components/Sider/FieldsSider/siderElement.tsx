@@ -9,12 +9,8 @@ const SidebarItem: React.FC<Props> = ({ name }) => {
   const [{ isDragging }, drag] = useDrag({
     type: "sidebarItem",
     item: { name },
-    end: (item, monitor) => {
+    end: (_, monitor) => {
       const dropResult = monitor.getDropResult<Props>();
-
-      if (item && dropResult) {
-        console.log(dropResult);
-      }
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
