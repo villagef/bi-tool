@@ -49,7 +49,7 @@ const UploadComponent = () => {
     <>
       <Dragger {...props}>
         <p>
-          <InboxOutlined className="bg-mainLight" />
+          <InboxOutlined className="text-4xl text-mainLight" />
         </p>
         <p>Click or drag file to this area to upload</p>
         <p>Support for a single upload from .csv</p>
