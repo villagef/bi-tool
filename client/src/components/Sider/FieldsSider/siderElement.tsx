@@ -21,7 +21,7 @@ const SidebarItem: React.FC<Props> = ({ name }) => {
   return (
     <div
       ref={drag}
-      className="w-[calc(100%-20px)] shadow m-2 p-1 font-medium text-gray hover:bg-mainLight hover:text-white"
+      className="m-2 w-[calc(100%-20px)] p-1 font-medium text-gray shadow hover:bg-mainLight hover:text-white"
       style={{
         opacity: isDragging ? 0.5 : 1,
         cursor: "move",

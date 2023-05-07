@@ -6,7 +6,7 @@ import { charts_mock } from "./mocked_data";
 
 const PropertiesSider = () => {
   const [doppedFields, setDroppedFields] = useState<string[]>([]);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: "sidebarItem",
     drop: (element: any) =>
@@ -20,40 +20,47 @@ const PropertiesSider = () => {
   return (
     <Sider
       collapsible
-      reverseArrow={true}
-      collapsed={open}
-      theme="light"
-      className="h-full overflow-hidden relative shadow-inner"
-      collapsedWidth={20}
-      onCollapse={() => setOpen((prev) => !prev)}
+      collapsed={!open}
+      theme={open ? "light" : "dark"}
+      className="relative h-full overflow-hidden shadow-inner"
+      collapsedWidth={32}
+      trigger={null}
+      onClick={() => !open && setOpen((prev) => !prev)}
     >
-      {!open && (
+      {!open ? (
+        <div className="w-full rotate-90 cursor-pointer pl-2 text-lg font-semibold text-white">
+          Properties
+        </div>
+      ) : (
         <>
-          <div className="flex items-center font-bold p-2.5 h-10 w-full text-base bg-main text-white">
+          <div
+            className="flex h-10 w-full cursor-pointer items-center bg-main p-2.5 text-base font-bold text-white"
+            onClick={() => setOpen((prev) => !prev)}
+          >
             Properties
           </div>
-          <div className="w-full h-auto min-h-[130px] p-2">
-            <div className="font-medium text-sm text-gray">Charts</div>
-            <div className="w-full h-full flex flex-wrap">
+          <div className="h-auto min-h-[130px] w-full p-2">
+            <div className="text-sm font-medium text-gray">Charts</div>
+            <div className="flex h-full w-full flex-wrap">
               {charts_mock.map((chart) => (
                 <div
                   key={chart.id}
-                  className="m-0.5 p-1.5 text-gray text-xl cursor-pointer hover:text-mainLight"
+                  className="m-0.5 cursor-pointer p-1.5 text-xl text-gray hover:text-mainLight"
                 >
                   {chart.source}
                 </div>
               ))}
             </div>
           </div>
-          <div className="w-full h-0.5 bg-main"></div>
-          <div ref={drop} className="w-full h-full absolute">
+          <div className="h-0.5 w-full bg-main"></div>
+          <div ref={drop} className="absolute h-full w-full">
             {doppedFields.length > 0 ? (
               doppedFields?.map((field: string) => (
                 <SidebarItem key={field} name={field} />
               ))
             ) : (
               <div
-                className="flex justify-center items-center w-[calc(100%-20px)] h-[calc(100%-250px)]  border-[1px] border-gray border-dashed m-2.5"
+                className="m-2.5 flex h-[calc(100%-195px)] w-[calc(100%-20px)] items-center justify-center border-[1px] border-dashed border-gray"
                 style={{
                   background: canDrop && isOver ? "#e2ebf9" : "transparent",
                   color: canDrop && isOver && "gray",

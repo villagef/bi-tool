@@ -14,13 +14,7 @@ const ContentBox = ({ children }: Props) => {
 
   return (
     <>
-      <Content
-        style={{
-          margin: "8px 8px",
-          padding: 12,
-          background: colorBgContainer,
-        }}
-      >
+      <Content className={`m-2 bg-[${colorBgContainer}] p-3`}>
         {children}
       </Content>
     </>

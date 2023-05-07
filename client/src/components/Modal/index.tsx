@@ -45,7 +45,7 @@ const ModalComponent = ({
               type="primary"
               htmlType="submit"
               onClick={onOk}
-              style={{ background: "#030852" }}
+              className="bg-main"
             >
               Submit
             </Button>

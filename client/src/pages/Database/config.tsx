@@ -68,7 +68,7 @@ export const CONFIG = (
         <div className="flex justify-center">
           <Tooltip placement="left" title={"View details"}>
             <Button
-              className="flex items-center justify-center my-0 mx-1.5"
+              className="mx-1.5 my-0 flex items-center justify-center"
               onClick={() => handleViewDetails(record?.id)}
             >
               <SearchOutlined />
@@ -83,7 +83,7 @@ export const CONFIG = (
               onConfirm={() => handleRemoveDataset(record?.id)}
             >
               <Button
-                className="flex items-center justify-center my-0 mx-3 bg-red"
+                className="mx-3 my-0 flex items-center justify-center bg-red"
                 type="primary"
               >
                 <DeleteOutlined />

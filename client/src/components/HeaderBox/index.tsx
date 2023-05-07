@@ -14,9 +14,7 @@ const HeaderBox = ({ children }: Props) => {
 
   return (
     <>
-      <Header style={{ padding: 0, background: colorBgContainer }}>
-        {children}
-      </Header>
+      <Header className={`p-0 bg-[${colorBgContainer}]`}>{children}</Header>
     </>
   );
 };

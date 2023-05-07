@@ -24,20 +24,20 @@ const NavbarComponent = () => {
         collapsed={collapsed}
         collapsedWidth={50}
       >
-        <div className="flex justify-center items-center w-full h-16">
-          <div className="w-full flex items-center justify-center text-white">
+        <div className="flex h-16 w-full items-center justify-center">
+          <div className="flex w-full items-center justify-center text-white">
             {collapsed ? (
               <div>
                 <MenuUnfoldOutlined
-                  className="hover:text-mainLight text-2xl"
+                  className="text-2xl hover:text-mainLight"
                   onClick={() => setCollapsed(!collapsed)}
                 />
               </div>
             ) : (
-              <div className="w-full px-3 flex items-center justify-between">
+              <div className="flex w-full items-center justify-between px-3">
                 <p className=" text-lg">logooo</p>
                 <MenuFoldOutlined
-                  className="hover:text-mainLight text-2xl"
+                  className="text-2xl hover:text-mainLight"
                   onClick={() => setCollapsed(!collapsed)}
                 />
               </div>

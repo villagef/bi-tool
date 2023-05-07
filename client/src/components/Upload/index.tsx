@@ -48,15 +48,11 @@ const UploadComponent = () => {
   return (
     <>
       <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
-          <InboxOutlined style={{ color: "#1677ff" }} />
+        <p>
+          <InboxOutlined className="bg-mainLight" />
         </p>
-        <p className="ant-upload-text">
-          Click or drag file to this area to upload
-        </p>
-        <p className="ant-upload-hint">
-          Support for a single upload from .csv.
-        </p>
+        <p>Click or drag file to this area to upload</p>
+        <p>Support for a single upload from .csv</p>
       </Dragger>
       {uploadResult && (
         <UploadResult

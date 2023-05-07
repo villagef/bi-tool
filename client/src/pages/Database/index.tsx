@@ -26,10 +26,10 @@ const DatabasePage = () => {
         {viewDetailsId && (
           <DatasetDetails id={viewDetailsId} setId={setViewDetailsId} />
         )}
-        <div className="w-full h-1/3 my-1.5 mx-0">
+        <div className="mx-0 my-1.5 h-1/3 w-full">
           <UploadComponent />
         </div>
-        <div className="w-full h-2/3 my-3 mx-0">
+        <div className="mx-0 my-3 h-2/3 w-full">
           <TableComponent
             columns={CONFIG(handleViewDetails, HandleRemoveDataset)}
             data={data}
