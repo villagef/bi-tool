@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { Layout } from "antd";
-import "components/Layout/index.css";
 import NavbarComponent from "components/Navbar";
 
 type Props = {
@@ -9,9 +8,9 @@ type Props = {
 
 const LayoutComponent = ({ children }: Props) => {
   return (
-    <Layout className="layout-wrapper">
+    <Layout className="h-full min-h-screen w-full overflow-x-hidden">
       <NavbarComponent />
-      <Layout className="site-layout">{children}</Layout>
+      <Layout>{children}</Layout>
     </Layout>
   );
 };

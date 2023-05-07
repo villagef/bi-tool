@@ -55,9 +55,9 @@ export const CONFIG = (
       width: "60px",
       render: (tag: string) =>
         tag === "text/csv" ? (
-          <FileExcelFilled style={{ color: "#34a853" }} />
+          <FileExcelFilled className="text-green" />
         ) : (
-          <FireOutlined style={{ color: "#fbbc04" }} />
+          <FireOutlined className="text-yellow" />
         ),
     },
     {
@@ -65,10 +65,10 @@ export const CONFIG = (
       dataIndex: "action",
       key: "action",
       render: (_: unknown, record: Partial<DatasetProps>) => (
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="flex justify-center">
           <Tooltip placement="left" title={"View details"}>
             <Button
-              style={{ margin: "0px 5px" }}
+              className="flex items-center justify-center my-0 mx-1.5"
               onClick={() => handleViewDetails(record?.id)}
             >
               <SearchOutlined />
@@ -83,7 +83,7 @@ export const CONFIG = (
               onConfirm={() => handleRemoveDataset(record?.id)}
             >
               <Button
-                style={{ margin: "0px 10px", background: "#eb3627" }}
+                className="flex items-center justify-center my-0 mx-3 bg-red"
                 type="primary"
               >
                 <DeleteOutlined />

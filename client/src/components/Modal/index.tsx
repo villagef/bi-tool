@@ -1,6 +1,5 @@
 import { Button, Modal } from "antd";
 import { ReactNode } from "react";
-import "components/Modal/index.css";
 
 interface Props {
   children: ReactNode;
@@ -23,7 +22,7 @@ const ModalComponent = ({
     <>
       <Modal
         open={open}
-        className="custom-modal"
+        className="max-w-screen-2xl"
         closable={closable}
         width="90vw"
         title={title}
@@ -53,7 +52,7 @@ const ModalComponent = ({
           ),
         ]}
       >
-        <div className="custom-modal-wrapper">{children}</div>
+        <div className="max-h-[65vh] overflow-y-auto">{children}</div>
       </Modal>
     </>
   );

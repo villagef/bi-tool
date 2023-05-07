@@ -13,7 +13,7 @@ const TableComponent = ({
 }: TableProps) => {
   return (
     <>
-      {title && <h1>{title}</h1>}
+      {title && <h1 className="font-medium text-lg py-2 text-gray">{title}</h1>}
       <Table
         className="table-component"
         columns={columns}

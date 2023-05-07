@@ -4,7 +4,6 @@ import TableComponent from "components/Table";
 import UploadComponent from "components/Upload";
 import { CONFIG } from "./config";
 import { DatasetProps } from "./types";
-import "./index.css";
 import DatasetDetails from "components/DatasetDetails";
 import useFetchData, { QueryKeys } from "hooks/useFetchData";
 import useDeleteData from "hooks/useDeleteData";
@@ -27,10 +26,10 @@ const DatabasePage = () => {
         {viewDetailsId && (
           <DatasetDetails id={viewDetailsId} setId={setViewDetailsId} />
         )}
-        <div className="database-upload-section">
+        <div className="w-full h-1/3 my-1.5 mx-0">
           <UploadComponent />
         </div>
-        <div className="database-table-section">
+        <div className="w-full h-2/3 my-3 mx-0">
           <TableComponent
             columns={CONFIG(handleViewDetails, HandleRemoveDataset)}
             data={data}

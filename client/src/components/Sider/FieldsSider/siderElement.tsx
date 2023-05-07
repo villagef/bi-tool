@@ -10,7 +10,7 @@ const SidebarItem: React.FC<Props> = ({ name }) => {
     type: "sidebarItem",
     item: { name },
     end: (_, monitor) => {
-      const dropResult = monitor.getDropResult<Props>();
+      // const dropResult = monitor.getDropResult<Props>();
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -21,7 +21,7 @@ const SidebarItem: React.FC<Props> = ({ name }) => {
   return (
     <div
       ref={drag}
-      className="sidebar-item"
+      className="w-[calc(100%-20px)] shadow m-2 p-1 font-medium text-gray hover:bg-mainLight hover:text-white"
       style={{
         opacity: isDragging ? 0.5 : 1,
         cursor: "move",

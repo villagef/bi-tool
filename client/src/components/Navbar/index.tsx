@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import "components/Navbar/index.css";
+import { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -25,15 +24,25 @@ const NavbarComponent = () => {
         collapsed={collapsed}
         collapsedWidth={50}
       >
-        <div className="navbar-logo-wrapper">
-          {!collapsed && <div className="navbar-logo" />}
-          {React.createElement(
-            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-            {
-              className: "navbar-trigger",
-              onClick: () => setCollapsed(!collapsed),
-            }
-          )}
+        <div className="flex justify-center items-center w-full h-16">
+          <div className="w-full flex items-center justify-center text-white">
+            {collapsed ? (
+              <div>
+                <MenuUnfoldOutlined
+                  className="hover:text-mainLight text-2xl"
+                  onClick={() => setCollapsed(!collapsed)}
+                />
+              </div>
+            ) : (
+              <div className="w-full px-3 flex items-center justify-between">
+                <p className=" text-lg">logooo</p>
+                <MenuFoldOutlined
+                  className="hover:text-mainLight text-2xl"
+                  onClick={() => setCollapsed(!collapsed)}
+                />
+              </div>
+            )}
+          </div>
         </div>
         <Menu
           theme="dark"

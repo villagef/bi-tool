@@ -1,7 +1,6 @@
 import Sider from "antd/es/layout/Sider";
 import { useState } from "react";
 import { useDrop } from "react-dnd";
-import "./index.css";
 import SidebarItem from "../FieldsSider/siderElement";
 import { charts_mock } from "./mocked_data";
 
@@ -24,35 +23,42 @@ const PropertiesSider = () => {
       reverseArrow={true}
       collapsed={open}
       theme="light"
-      className="properties-sider"
+      className="h-full overflow-hidden relative shadow-inner"
       collapsedWidth={20}
       onCollapse={() => setOpen((prev) => !prev)}
     >
       {!open && (
         <>
-          <div className="properties-sider-title">Properties</div>
-          <div className="properties-sider-charts-wrapper">
-            <div className="properties-sider-charts-title">Charts</div>
-            <div className="properties-sider-charts">
+          <div className="flex items-center font-bold p-2.5 h-10 w-full text-base bg-main text-white">
+            Properties
+          </div>
+          <div className="w-full h-auto min-h-[130px] p-2">
+            <div className="font-medium text-sm text-gray">Charts</div>
+            <div className="w-full h-full flex flex-wrap">
               {charts_mock.map((chart) => (
-                <div key={chart.id} className="properties-sider-chart">
+                <div
+                  key={chart.id}
+                  className="m-0.5 p-1.5 text-gray text-xl cursor-pointer hover:text-mainLight"
+                >
                   {chart.source}
                 </div>
               ))}
             </div>
           </div>
-          <div className="divider"></div>
-          <div
-            ref={drop}
-            className="properties-sider-wrapper"
-            style={{ background: canDrop && isOver ? "red" : "transparent" }}
-          >
+          <div className="w-full h-0.5 bg-main"></div>
+          <div ref={drop} className="w-full h-full absolute">
             {doppedFields.length > 0 ? (
               doppedFields?.map((field: string) => (
                 <SidebarItem key={field} name={field} />
               ))
             ) : (
-              <div className="properties-sider-placeholder">
+              <div
+                className="flex justify-center items-center w-[calc(100%-20px)] h-[calc(100%-250px)]  border-[1px] border-gray border-dashed m-2.5"
+                style={{
+                  background: canDrop && isOver ? "#e2ebf9" : "transparent",
+                  color: canDrop && isOver && "gray",
+                }}
+              >
                 Drop fields here...
               </div>
             )}
