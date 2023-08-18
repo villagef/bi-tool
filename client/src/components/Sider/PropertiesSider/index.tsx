@@ -56,7 +56,11 @@ const PropertiesSider = () => {
           <div ref={drop} className="absolute h-full w-full">
             {doppedFields.length > 0 ? (
               doppedFields?.map((field: string) => (
-                <SidebarItem key={field} name={field} />
+                <SidebarItem
+                  key={field}
+                  name={field}
+                  setDroppedFields={setDroppedFields}
+                />
               ))
             ) : (
               <div
