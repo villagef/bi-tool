@@ -25,7 +25,7 @@ const FieldsSider = () => {
       collapsible
       collapsed={!open}
       theme={open ? "light" : "dark"}
-      className="relative h-full w-full overflow-hidden "
+      className="relative h-full w-full overflow-hidden shadow"
       collapsedWidth={32}
       trigger={null}
       onClick={() => !open && setOpen((prev) => !prev)}

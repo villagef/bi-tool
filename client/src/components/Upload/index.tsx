@@ -47,7 +47,7 @@ const UploadComponent = () => {
   };
   return (
     <>
-      <Dragger {...props}>
+      <Dragger {...props} className="drop-shadow">
         <p>
           <InboxOutlined className="text-4xl text-mainLight" />
         </p>

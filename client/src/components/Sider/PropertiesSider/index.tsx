@@ -22,7 +22,7 @@ const PropertiesSider = () => {
       collapsible
       collapsed={!open}
       theme={open ? "light" : "dark"}
-      className="relative h-full overflow-hidden shadow-inner"
+      className="relative h-full overflow-hidden shadow"
       collapsedWidth={32}
       trigger={null}
       onClick={() => !open && setOpen((prev) => !prev)}

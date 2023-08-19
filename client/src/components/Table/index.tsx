@@ -15,7 +15,7 @@ const TableComponent = ({
     <>
       {title && <h1 className="py-2 text-lg font-medium text-gray">{title}</h1>}
       <Table
-        className="table-component"
+        className="table-component drop-shadow"
         columns={columns}
         rowKey={rowKey ?? "id"}
         dataSource={data}

@@ -25,7 +25,7 @@ const SidebarItem: React.FC<Props> = ({ name, setDroppedFields }) => {
   return (
     <div
       ref={drag}
-      className="m-2 flex w-[calc(100%-20px)] items-center justify-between p-2 font-medium text-gray shadow hover:bg-mainLight hover:text-white"
+      className="m-2 flex w-[calc(100%-20px)] items-center justify-between p-2 font-medium text-gray shadow hover:bg-gray-light hover:text-white"
       style={{
         opacity: isDragging ? 0.5 : 1,
         cursor: "move",
