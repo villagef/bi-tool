@@ -1,6 +1,7 @@
-import Sider from "antd/es/layout/Sider";
 import { useState } from "react";
 import { useDrop } from "react-dnd";
+import Sider from "antd/es/layout/Sider";
+import { DoubleRightOutlined } from "@ant-design/icons";
 import SidebarItem from "../FieldsSider/siderElement";
 import { charts_mock } from "./mocked_data";
 
@@ -21,23 +22,25 @@ const PropertiesSider = () => {
     <Sider
       collapsible
       collapsed={!open}
-      theme={open ? "light" : "dark"}
+      theme="light"
       className="relative h-full overflow-hidden shadow"
       collapsedWidth={32}
       trigger={null}
       onClick={() => !open && setOpen((prev) => !prev)}
     >
       {!open ? (
-        <div className="w-full rotate-90 cursor-pointer pl-2 text-lg font-semibold text-white">
-          Properties
+        <div className="flex w-full rotate-90 cursor-pointer items-center pl-2 text-lg font-semibold text-gray-dark">
+          <DoubleRightOutlined className="ml-1.5 mr-3 rotate-90" />
+          <p>Properties</p>
         </div>
       ) : (
         <>
           <div
-            className="flex h-10 w-full cursor-pointer items-center bg-main p-2.5 text-base font-bold text-white"
+            className="flex h-10 w-full cursor-pointer items-center justify-between bg-main p-2.5 text-base font-bold text-white"
             onClick={() => setOpen((prev) => !prev)}
           >
-            Properties
+            <p>Properties</p>
+            <DoubleRightOutlined />
           </div>
           <div className="h-auto min-h-[130px] w-full p-2">
             <div className="text-sm font-medium text-gray">Charts</div>

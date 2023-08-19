@@ -1,8 +1,12 @@
-import Sider from "antd/es/layout/Sider";
 import { useRef, useState } from "react";
+import Sider from "antd/es/layout/Sider";
+import {
+  UpOutlined,
+  DownOutlined,
+  DoubleRightOutlined,
+} from "@ant-design/icons";
 import "./index.css";
 import SidebarItem from "./siderElement";
-import { UpOutlined, DownOutlined } from "@ant-design/icons";
 
 const FieldsSider = () => {
   const [open, setOpen] = useState(false);
@@ -31,16 +35,20 @@ const FieldsSider = () => {
       onClick={() => !open && setOpen((prev) => !prev)}
     >
       {!open ? (
-        <div className="w-full rotate-90 cursor-pointer pl-2 text-lg font-semibold text-white">
-          Fields
-        </div>
+        <>
+          <div className="flex w-full rotate-90 cursor-pointer items-center pl-2 text-lg font-semibold text-white">
+            <DoubleRightOutlined className="ml-1.5 mr-3 rotate-90" />
+            <p>Fields </p>
+          </div>
+        </>
       ) : (
         <>
           <div
-            className="flex h-10 w-full cursor-pointer items-center bg-main p-2.5 text-base font-bold text-white"
+            className="flex h-10 w-full cursor-pointer items-center justify-between bg-main p-2.5 text-base font-bold text-white"
             onClick={() => setOpen((prev) => !prev)}
           >
-            Fields
+            <p>Fields</p>
+            <DoubleRightOutlined />
           </div>
           <div
             id="scroll-to-top"
