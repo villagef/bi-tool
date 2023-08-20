@@ -4,6 +4,7 @@ import Sider from "antd/es/layout/Sider";
 import { DoubleRightOutlined } from "@ant-design/icons";
 import SidebarItem from "../FieldsSider/siderElement";
 import { charts_mock } from "./mocked_data";
+import ChartItem from "./chartItem";
 
 const PropertiesSider = () => {
   const [doppedFields, setDroppedFields] = useState<string[]>([]);
@@ -46,12 +47,7 @@ const PropertiesSider = () => {
             <div className="text-sm font-medium text-gray">Charts</div>
             <div className="flex h-full w-full flex-wrap">
               {charts_mock.map((chart) => (
-                <div
-                  key={chart.id}
-                  className="m-0.5 cursor-pointer p-1.5 text-xl text-gray hover:text-mainLight"
-                >
-                  {chart.source}
-                </div>
+                <ChartItem key={chart.id} data={chart} />
               ))}
             </div>
           </div>

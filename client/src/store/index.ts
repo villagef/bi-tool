@@ -3,13 +3,18 @@ import { create } from "zustand";
 
 interface State {
   gridLayouts: Layout[];
+  isChartDragging: boolean;
 }
 
 interface Action {
-  updateGridLayouts: (gridLayouts: State["gridLayouts"]) => void;
+  updateGridLayouts: (gridLayout: Layout) => void;
+  updateIsChartDragging: (gridLayouts: boolean) => void;
 }
 
 export const useStore = create<State & Action>((set) => ({
-  gridLayouts: null,
-  updateGridLayouts: (gridLayouts) => set(() => ({ gridLayouts: gridLayouts })),
+  gridLayouts: [],
+  isChartDragging: false,
+  updateGridLayouts: (gridLayout) =>
+    set((state) => ({ gridLayouts: [...state.gridLayouts, gridLayout] })),
+  updateIsChartDragging: (arg) => set(() => ({ isChartDragging: arg })),
 }));

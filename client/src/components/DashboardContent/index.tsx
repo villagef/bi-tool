@@ -1,79 +1,47 @@
-import { useEffect, useLayoutEffect, useState } from "react";
-import { Layout, Responsive, WidthProvider } from "react-grid-layout";
+import { Responsive, WidthProvider } from "react-grid-layout";
+import { useDrop } from "react-dnd";
 import _ from "lodash";
+import { useStore } from "store";
 import ContentBox from "components/ContentBox";
 import "./index.css";
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
-import { useStore } from "store";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-type ItemCallback = (
-  layout: Layout[],
-  oldItem: Layout,
-  newItem: Layout,
-  placeholder: Layout,
-  e: MouseEvent,
-  element: HTMLElement
-) => void;
-
 const DashboardContent = () => {
-  const [gridLayouts, updateGridLayouts] = useStore((state) => [
-    state.gridLayouts,
-    state.updateGridLayouts,
-  ]);
+  const [gridLayouts, isChartDragging, updateGridLayouts] = useStore(
+    (state) => [
+      state.gridLayouts,
+      state.isChartDragging,
+      state.updateGridLayouts,
+    ]
+  );
 
-  const [layouts, setLayouts] = useState<Layout[]>([
-    {
-      i: "a",
-      x: 0,
-      y: 0,
-      w: 192,
-      h: 20,
-      minW: 12,
-      minH: 8,
-      isBounded: true,
-      isDraggable: true,
-    },
-    {
-      i: "b",
-      x: 0,
-      y: 0,
-      w: 192,
-      h: 20,
-      minW: 12,
-      minH: 8,
-      isBounded: true,
-      isDraggable: true,
-    },
-    {
-      i: "c",
-      x: 0,
-      y: 0,
-      w: 192,
-      h: 20,
-      minW: 12,
-      minH: 8,
-      isBounded: true,
-      isDraggable: true,
-    },
-  ]);
-
-  const onDragStop = (
-    layout: Layout[],
-    oldItem: Layout,
-    newItem: Layout,
-    placeholder: Layout,
-    e: MouseEvent,
-    element: HTMLElement
-  ): ItemCallback => {
-    // console.log(layout, oldItem, newItem, placeholder);
-    return;
-  };
+  const [{}, drop] = useDrop(() => ({
+    accept: "chartItem",
+    drop: (element: any) =>
+      updateGridLayouts({
+        i: element.data.id,
+        x: 0,
+        y: 0,
+        w: 96,
+        h: 20,
+        minW: 12,
+        minH: 8,
+        isBounded: true,
+        isDraggable: true,
+      }),
+  }));
 
   return (
     <ContentBox>
-      <div className="h-full w-full bg-[#f7fbff] p-2.5 shadow">
+      <div
+        className="relative h-full w-full bg-[#f7fbff] p-2.5 shadow"
+        ref={drop}
+      >
+        {isChartDragging && (
+          <div className="absolute z-10 h-[calc(100%-20px)] w-[calc(100%-20px)] bg-gray-dark bg-opacity-10 " />
+        )}
         <ResponsiveReactGridLayout
           style={{
             height: "100%",
@@ -86,16 +54,15 @@ const DashboardContent = () => {
           containerPadding={[0, 0]}
           breakpoints={{ lg: 100 }}
           cols={{ lg: 192 }}
-          onDragStop={onDragStop}
-          layouts={{ lg: layouts }}
+          // onDragStop={onDragStop}
+          layouts={{ lg: gridLayouts }}
           measureBeforeMount={true}
           useCSSTransforms={true}
           compactType={null}
           preventCollision={true}
           isDroppable={true}
-          // droppingItem={{ i: "xx", h: 2, w: 2 }}
         >
-          {layouts.map((itm) => (
+          {gridLayouts?.map((itm) => (
             <div
               key={itm.i}
               data-grid={itm}
