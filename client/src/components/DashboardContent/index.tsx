@@ -5,6 +5,7 @@ import ContentBox from "components/ContentBox";
 import "./index.css";
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
+import { useStore } from "store";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 type ItemCallback = (
@@ -17,6 +18,11 @@ type ItemCallback = (
 ) => void;
 
 const DashboardContent = () => {
+  const [gridLayouts, updateGridLayouts] = useStore((state) => [
+    state.gridLayouts,
+    state.updateGridLayouts,
+  ]);
+
   const [layouts, setLayouts] = useState<Layout[]>([
     {
       i: "a",
